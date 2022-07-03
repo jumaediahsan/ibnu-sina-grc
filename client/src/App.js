@@ -7,10 +7,11 @@ import Rab from './page/Rab';
 
 function App() {
  return (
-  <div className="App">
+  <div>
    <Routes>
     <Route path="/" element={<Dashboard />} />
     <Route path="rab" element={<Rab />} />
+    <Route path="manage" element={<Dashboard />} />
    </Routes>
   </div>
  );

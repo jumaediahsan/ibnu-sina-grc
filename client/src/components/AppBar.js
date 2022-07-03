@@ -11,13 +11,11 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const pages = [{ id: '1', title: 'Home', linkTo: '/' }, { id: '2', title: 'RAB', linkTo: '/rab' }];
-// const pages = ['Home', 'RAB']
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = [{ id: '1', title: 'GALERY', linkTo: '/' }, { id: '2', title: 'RAB', linkTo: '/rab' }];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = (props) => {
  const [anchorElNav, setAnchorElNav] = React.useState(null);
  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -36,8 +34,10 @@ const ResponsiveAppBar = () => {
   setAnchorElUser(null);
  };
 
+ const location = useLocation();
+ console.log('llllllllll', location)
  return (
-  <AppBar position="static">
+  <AppBar position="static" style={{background: '#F15412'}}>
    <Container maxWidth="xl">
     <Toolbar disableGutters>
      <Typography
@@ -45,6 +45,7 @@ const ResponsiveAppBar = () => {
       noWrap
       component="div"
       sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+      // style={styles.title}
      >
       IBNU SINA GRC
      </Typography>
@@ -81,7 +82,7 @@ const ResponsiveAppBar = () => {
        {pages.map((page) => (
         <MenuItem key={page.id} onClick={handleCloseNavMenu}>
          <Link to={page.linkTo} >
-          <Typography textAlign="center">{page.title}</Typography>
+          <Typography textAlign="center" style={styles.title}>{page.title}</Typography>
          </Link>
         </MenuItem>
        ))}
@@ -92,16 +93,18 @@ const ResponsiveAppBar = () => {
       noWrap
       component="div"
       sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
+      style={styles.title}
      >
       LOGO
      </Typography>
      <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
       {pages.map((page) => (
-       <Link to={page.linkTo} key={page.id}>
+       <Link to={page.linkTo} key={page.id} style={{textDecoration:"none"}}>
         <Button
          key={page.id}
          onClick={handleCloseNavMenu}
          sx={{ my: 2, color: 'white', display: 'block' }}
+         style={styles.title}
         >
          {page.title}
         </Button>
@@ -144,3 +147,11 @@ const ResponsiveAppBar = () => {
  );
 };
 export default ResponsiveAppBar;
+
+const styles = {
+  title: {
+    fontWeight: 700,
+    lineHeight: 1.75,
+    letterSpacing: 0.5
+  }
+}
